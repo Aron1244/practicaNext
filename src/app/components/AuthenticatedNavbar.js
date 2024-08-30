@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useCart } from "../context/CarContext";
 import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CarContext";
 
-export default function Navbar() {
+export default function AuthenticatedNavbar() {
+  const { logout } = useAuth();
   const { cartCount } = useCart();
-  const { isAuthenticated, logout } = useAuth();
 
   return (
     <nav className="bg-blue-600 p-4">
@@ -24,18 +24,6 @@ export default function Navbar() {
           <Link href="/catalog" className="text-white hover:text-blue-200 px-4">
             Catalog
           </Link>
-          {isAuthenticated ? (
-            <button
-              onClick={logout}
-              className="text-white hover:text-blue-200 px-4"
-            >
-              Logout
-            </button>
-          ) : (
-            <Link href="/login" className="text-white hover:text-blue-200 px-4">
-              Login
-            </Link>
-          )}
           <Link
             href="/cart"
             className="relative inline-flex items-center text-white hover:text-blue-200 px-4"
@@ -47,6 +35,12 @@ export default function Navbar() {
               </span>
             )}
           </Link>
+          <button
+            onClick={logout}
+            className="ml-4 bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700"
+          >
+            Logout
+          </button>
         </div>
       </div>
     </nav>

@@ -1,17 +1,27 @@
-// src/app/login/page.js
 "use client";
 
 import { useState, FormEvent } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter();
+  const { login } = useAuth();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Aquí puedes agregar la lógica para manejar el login
-    alert('Login submitted');
+
+    // Usar la función login del AuthContext
+    if (email && password) {
+      login(email, password);
+      router.push("/dashboard"); // Redirige a la página principal
+    } else {
+      setError("Credenciales incorrectas");
+    }
   };
 
   return (
@@ -51,6 +61,7 @@ export default function Login() {
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             />
           </div>
+          {error && <p className="text-red-600 text-center">{error}</p>}
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700"

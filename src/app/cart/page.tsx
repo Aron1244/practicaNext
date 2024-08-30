@@ -34,27 +34,25 @@ export default function Cart() {
               key={product.id}
               className="bg-white p-4 rounded-lg shadow-md flex flex-col md:flex-row justify-between items-center"
             >
-              <div className="flex flex-col md:flex-row md:items-center">
+              <div className="flex flex-col md:flex-row items-start md:items-center">
                 <div className="mb-4 md:mb-0">
                   <h2 className="text-xl font-semibold">{product.name}</h2>
                   <p className="text-gray-700">{product.description}</p>
                 </div>
-                <div className="flex items-center mt-4 md:mt-0 md:ml-6 md:justify-end w-full">
-                  <div className="flex space-x-2">
-                    <button
-                      onClick={() => decreaseQuantity(product.id)}
-                      className="bg-blue-600 text-white py-1 px-3 rounded-md hover:bg-blue-700"
-                    >
-                      -
-                    </button>
-                    <span className="text-lg">{product.quantity}</span>
-                    <button
-                      onClick={() => increaseQuantity(product.id)}
-                      className="bg-blue-600 text-white py-1 px-3 rounded-md hover:bg-blue-700"
-                    >
-                      +
-                    </button>
-                  </div>
+                <div className="flex items-center mt-4 md:mt-0 md:ml-6">
+                  <button
+                    onClick={() => decreaseQuantity(product.id)}
+                    className="bg-blue-600 text-white py-1 px-3 rounded-md hover:bg-blue-700"
+                  >
+                    -
+                  </button>
+                  <span className="mx-4 text-lg">{product.quantity}</span>
+                  <button
+                    onClick={() => increaseQuantity(product.id)}
+                    className="bg-blue-600 text-white py-1 px-3 rounded-md hover:bg-blue-700"
+                  >
+                    +
+                  </button>
                   <button
                     onClick={() => removeFromCart(product.id)}
                     className="bg-red-600 text-white py-2 px-4 ml-4 rounded-md hover:bg-red-700"
